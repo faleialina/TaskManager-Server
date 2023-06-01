@@ -1,5 +1,5 @@
 const express = require('express');
-const { getAllUser, getUserById, createUser, deleteUser } = require('../service/user.service');
+const { getAllUser, getUserById, createUser,updateUser, deleteUser } = require('../service/user.service');
 const { buildResponse } = require('../helper/buildResponse');
 
 const route = express.Router();
@@ -27,6 +27,17 @@ route.post('/', async (req, res) => {
     try {
         const { name, surname, email, pwd } = req.body;
         const data = await createUser(name, surname, email, pwd);
+        buildResponse(res, 200, data);
+    } catch (error) {
+        buildResponse(res, 404, error.message);
+    }
+});
+
+route.put('/:id', async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { name, surname, email, pwd } = req.body;
+        const data = await updateUser(id, name, surname, email, pwd);
         buildResponse(res, 200, data);
     } catch (error) {
         buildResponse(res, 404, error.message);
