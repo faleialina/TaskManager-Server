@@ -1,4 +1,4 @@
-const { getAllTaskDb, getByIdTaskDb, createTaskDb } = require('../repository/task.repository');
+const { getAllTaskDb, getByIdTaskDb, createTaskDb, updateTaskDb, deleteTaskDb, patchTaskDb  } = require('../repository/task.repository');
 
 async function getAllTask() {
     const data = await getAllTaskDb();
@@ -14,7 +14,26 @@ async function getByIdTask(id) {
 
 async function createTask(task, user_id) {
     const data = await createTaskDb(task, user_id);
+    if (!data.length) throw new Error('объект не создан');
     return data;
 };
 
-module.exports = { getAllTask, getByIdTask, createTask };
+async function updateTask(id, task, user_id) {
+    const data = await updateTaskDb(id, task, user_id);
+    if (!data.length) throw new Error('такого id нет')
+    return data;
+};
+
+async function deleteTask(id) {
+    const data = await deleteTaskDb(id);
+    if (!data.length) throw new Error('такого id нет')
+    return data;
+}
+
+async function patchTask(id, clientData) {
+    const data = await patchTaskDb(id, clientData);
+    if (!data.length) throw new Error('такого id нет');
+    return data;
+}
+
+module.exports = { getAllTask, getByIdTask, createTask, updateTask, deleteTask, patchTask  };
