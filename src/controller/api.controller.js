@@ -20,9 +20,10 @@ route.post('/auth', async (req, res) => {
         const { email, pwd } = req.body;
         const data = await authUser(email, pwd);
         buildResponse(res, 200, data);
+
     } catch (error) {
         buildResponse(res, 404, error.message);
     }
-})
+});
 
 module.exports = route;
