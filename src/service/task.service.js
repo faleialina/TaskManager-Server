@@ -2,37 +2,37 @@ const { getAllTaskDb, getByIdTaskDb, createTaskDb, updateTaskDb, deleteTaskDb, p
 
 async function getAllTask() {
     const data = await getAllTaskDb();
-    if (!data.length) throw new Error('база данных не заполнена');
+    if (!data.length) throw new Error('database is not full');
     return data;
 };
 
 async function getByIdTask(id) {
     const data = await getByIdTaskDb(id);
-    if (!data.length) throw new Error('такого id нет');
+    if (!data.length) throw new Error('no such id');
     return data;
 };
 
 async function createTask(task, user_id) {
     const data = await createTaskDb(task, user_id);
-    if (!data.length) throw new Error('объект не создан');
+    if (!data.length) throw new Error('object not created');
     return data;
 };
 
 async function updateTask(id, task, user_id) {
     const data = await updateTaskDb(id, task, user_id);
-    if (!data.length) throw new Error('такого id нет')
+    if (!data.length) throw new Error('no such id')
     return data;
 };
 
 async function deleteTask(id) {
     const data = await deleteTaskDb(id);
-    if (!data.length) throw new Error('такого id нет')
+    if (!data.length) throw new Error('no such id')
     return data;
 }
 
 async function patchTask(id, clientData) {
     const data = await patchTaskDb(id, clientData);
-    if (!data.length) throw new Error('такого id нет');
+    if (!data.length) throw new Error('no such id');
     return data;
 }
 
