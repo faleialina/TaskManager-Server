@@ -1,4 +1,4 @@
-const { getAllUserDb, getUserByIdDb, createUserDb, updateUserDb, deleteUserDb} = require('../repository/user.repository');
+import { getAllUserDb, getUserByIdDb, createUserDb, updateUserDb, deleteUserDb } from '../repository/user.repository';
 
 async function getAllUser() {
     const data = await getAllUserDb();
@@ -29,4 +29,4 @@ async function deleteUser(id) {
     return data;
 }
 
-module.exports = { getAllUser, getUserById, createUser, updateUser, deleteUser};
+export { getAllUser, getUserById, createUser, updateUser, deleteUser };

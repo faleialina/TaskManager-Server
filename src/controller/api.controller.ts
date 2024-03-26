@@ -1,6 +1,6 @@
-const express = require('express');
-const { buildResponse } = require('../helper/buildResponse');
-const { createUser, authUser } = require('../service/api.service');
+import express from 'express';
+import { buildResponse } from '../helper/buildResponse';
+import { createUser, authUser } from '../service/api.service';
 
 
 const route = express.Router();
@@ -10,7 +10,7 @@ route.post('/reg', async (req, res) => {
         const { name, surname, email, pwd } = req.body;
         const data = await createUser(name, surname, email, pwd);
         buildResponse(res, 200, data);
-    } catch (error) {
+    } catch (error: any) {
         buildResponse(res, 404, error.message);
     }
 });
@@ -21,9 +21,9 @@ route.post('/auth', async (req, res) => {
         const data = await authUser(email, pwd);
         buildResponse(res, 200, data);
 
-    } catch (error) {
+    } catch (error: any) {
         buildResponse(res, 404, error.message);
     }
 });
 
-module.exports = route;
+export default route;

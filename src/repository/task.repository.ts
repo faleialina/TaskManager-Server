@@ -1,4 +1,4 @@
-const { pool } = require('../db');
+import { pool } from '../db';
 
 async function getAllTaskDb() {
     const client = await pool.connect();
@@ -47,4 +47,4 @@ async function patchTaskDb(id, clientData) {
     return res2;
 };
 
-module.exports = { getAllTaskDb, getByIdTaskDb, createTaskDb, updateTaskDb, deleteTaskDb, patchTaskDb };
+export { getAllTaskDb, getByIdTaskDb, createTaskDb, updateTaskDb, deleteTaskDb, patchTaskDb };

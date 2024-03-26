@@ -1,7 +1,7 @@
 function isvalidTaskId(req, res, next) {
     const { id } = req.params;
-    if (isNaN(id)) throw new Error('id is not a number');
-    if (id <= 0) throw new Error('id is negative');
+    if (isNaN(+id)) throw new Error('id is not a number');
+    if (+id <= 0) throw new Error('id is negative');
     next();
 };
 
@@ -13,5 +13,4 @@ function isvalidTaskBody(req, res, next) {
     if (user_id <= 0) throw new Error('user_id is negative');
     next();
 }
-
-module.exports = { isvalidTaskId, isvalidTaskBody };
+export { isvalidTaskId, isvalidTaskBody };

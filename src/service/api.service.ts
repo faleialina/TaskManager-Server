@@ -1,5 +1,5 @@
-const { createUserDb, getUserByEmail } = require('../repository/api.repository')
-const bcrypt = require('bcrypt');
+import { createUserDb, getUserByEmail } from '../repository/api.repository'
+import bcrypt from 'bcrypt';
 
 const salt = 2;
 
@@ -23,4 +23,4 @@ async function authUser(email, pwd) {
     return user;
 }
 
-module.exports = { createUser, authUser };
+export { createUser, authUser };
