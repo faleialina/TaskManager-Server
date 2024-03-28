@@ -2,16 +2,24 @@ import { pool } from '../db';
 
 async function createUserDb(name, surname, email, pwd) {
     const client = await pool.connect();
-    const sql = 'insert into users (name, surname, email, pwd) values ($1, $2, $3, $4) returning *';
-    const res = (await client.query(sql, [name, surname, email, pwd])).rows;
-    return res;
+    try {
+        await client.query('BEGIN');
+        const sql = 'INSERT INTO users(name, surname, email, pwd)VALUES($1,$2,$3,$4) RETURNING *';
+        const { rows } = await client.query(sql, [name, surname, email, pwd]);
+        await client.query('commit');
+        return rows;
+    } catch (error) {
+        await client.query('rollback');
+        return [];
+    }
 }
+
 
 async function getUserByEmail(email) {
     const client = await pool.connect();
     const sql = 'select * from users where email = $1';
-    const res = (await client.query(sql, [email])).rows;
-    return res;
+    const { rows } = await client.query(sql, [email]);
+    return rows;
 }
 
 export { createUserDb, getUserByEmail };
